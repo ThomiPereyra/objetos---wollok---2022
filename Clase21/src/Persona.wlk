@@ -1,5 +1,5 @@
 // Herencia simple
-
+// pruebo commit
 class Persona {
 	const enfermedades = []
 	var temperatura
