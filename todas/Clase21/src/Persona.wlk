@@ -1,9 +1,14 @@
 // Herencia simple
 // pruebo commit
+
 class Persona {
 	const enfermedades = []
 	var temperatura
 	var cantidadCelulas
+	
+	method cantidadCelulas() {
+		return cantidadCelulas 
+	}
 	
 	method contraerEnfermedad(unaEnfermedad) {
 		enfermedades.add(unaEnfermedad)
@@ -26,7 +31,7 @@ class Persona {
 	}
 	
 	method cantidadDeCelulasAmenazadasPorEnfermedadesAgresivas() {
-	  return self.enfermedadesAgresivas().sum({ unaEnfermedad => unaEnfermedad.celulasAmenazadas() })
+	  return self.enfermedadesAgresivas().sum({ unaEnfermedad => unaEnfermedad.cantidadCelulasAmenazantes()})
 	}
 	
 	method enfermedadesAgresivas() {
@@ -62,6 +67,22 @@ class Medico inherits Persona {
   method atenderA(unaPersona) {
     unaPersona.tomarMedicamento(dosis * 15)
   }
+}
+
+class JefeDeDepartamento inherits Medico(dosis = 0) {
+	const subordinados = #{}
+	
+	method incluirSubordinado(unSubordinado) {
+		subordinados.add(unSubordinado)
+	}
+	
+	override method atenderA(unaPersona) {
+		self.delegar(unaPersona)
+	}
+	
+	method delegar(unaPersona) {
+		subordinados.anyOne().atenderA(unaPersona)
+	}
 }
 
 // Method lookup

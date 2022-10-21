@@ -1,6 +1,7 @@
 import Persona.*
 import Enfermedad.*
 
+
 // 1. ¿De quién es la responsabilidad de ...?
 // 2. ¿Quién tiene la información mínima e indispensable para ...?
 
@@ -9,7 +10,8 @@ describe "Dr Casa" {
 	const frank = new Persona(temperatura = 36, cantidadCelulas = 3500000)
 	const logan = new Persona(temperatura = 36, cantidadCelulas = 3000000)
 
-  const cameron = new Medico(temperatura = 36, cantidadCelulas = 3500000, dosis = 10)
+  	const cameron = new Medico(temperatura = 36, cantidadCelulas = 3500000, dosis = 10)
+	const house = new JefeDeDepartamento(temperatura = 36, cantidadCelulas = 3400000, dosis = 12)
 	
 	const malaria500 = new EnfermedadInfecciosa(cantidadCelulasAmenazantes = 500)
 	const malaria800 = new EnfermedadInfecciosa(cantidadCelulasAmenazantes = 800)
@@ -37,7 +39,7 @@ describe "Dr Casa" {
 	test "Logan vive un día" {
 		
 		assert.equals(3, logan.cantidadDeEnfermedades())
-		// COMPLETAR EL TEST Y TERMINAR TODO EL ENUNCIADO
+		
 	}
 	
 	test "La malaria se atenua en 100 celulas" {
@@ -60,5 +62,12 @@ describe "Dr Casa" {
     logan.tomarMedicamento(500)
     assert.notThat(logan.tieneEnfermedad(malaria500))
   }	
+  
+  test "House atiende a Logan" {
+  	house.incluirSubordinado(cameron)
+  	house.atenderA(logan)
+  	
+  	assert.equals(2,logan.cantidadDeEnfermedades())
+  }
 
 }
